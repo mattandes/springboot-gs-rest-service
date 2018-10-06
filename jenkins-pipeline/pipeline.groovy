@@ -6,6 +6,7 @@ pipelineJob('springboot-gs-rest-service-build') {
     scm('H/5 * * * *')
   }
   description("SpringBoot GS Rest Service Build")
+  displayName("SpringBoot GS Rest Service Build")
 
   definition {
     cpsScm {
