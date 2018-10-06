@@ -7,8 +7,6 @@ node {
 
     stage('Build') {
         echo "My branch is: ${env.BRANCH_NAME}"
-        def flavor = flavor(env.BRANCH_NAME)
-        echo "Building flavor ${flavor}"
         sh "./gradlew clean build"
     }
 
