@@ -3,7 +3,7 @@
 def artifactoryServer = "artifactory"
 
 // Artifactory Resolver Repo
-def artifactoryResolverRepo = "jcenter"
+def artifactoryResolverRepo = "maven-all"
 
 // Artifactory snapshot repo to publish to
 def artifactorySnapshotRepo = "libs-snapshot-local"
