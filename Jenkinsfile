@@ -41,6 +41,7 @@ pipeline {
                 rtGradleRun(
                     usesPlugin: true,
                     useWrapper: true,
+                    buildFile: 'build.gradle',
                     tasks: 'clean build artifactoryPublish',
                     switches: '--no-daemon',
                     resolverId: "artifactory-resolver",
