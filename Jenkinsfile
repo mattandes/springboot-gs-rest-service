@@ -6,13 +6,10 @@ def artifactoryServer = "artifactory"
 def artifactoryResolverRepo = "maven-all"
 
 // Artifactory snapshot repo to publish to
-def artifactorySnapshotRepo = "libs-snapshot-local"
+def artifactoryDeployRepo = "libs-snapshot-local"
 
-// Artifactory release staging repo to publish to
-def artifactoryStagingRepo = "libs-staging-local"
-
-// Artifactory production release repo to promote to
-def artifactoryReleaseRepo = "libs-release-local"
+// Artifactory release repo to promote to
+def artifactoryPromoteRepo = "libs-release-local"
 
 pipeline {
     agent any
@@ -31,13 +28,12 @@ pipeline {
                 rtGradleDeployer(
                     id: 'artifactory-deployer',
                     serverId: artifactoryServer,
-                    repo: artifactorySnapshotRepo
+                    repo: artifactoryDeployRepo
                 )
             }
         }
         stage('Build') {
             steps {
-                //sh './gradlew clean build'
                 rtGradleRun(
                     usesPlugin: true,
                     useWrapper: true,
@@ -48,6 +44,15 @@ pipeline {
                 )
                 rtPublishBuildInfo(
                     serverId: artifactoryServer
+                )
+                rtAddInteractivePromotion (
+                    serverId: artifactoryServer,
+                    targetRepo: artifactoryPromoteRepo,
+                    comment: 'Promoted via Jenkins',
+                    status: 'Released',
+                    sourceRepo: artifactoryDeployRepo,
+                    failFast: true,
+                    copy: false
                 )
             }
         }
