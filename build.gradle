@@ -17,9 +17,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'maven'
 apply plugin: 'com.jfrog.artifactory'
 
-bootJar {
-    version =  project.version
-}
+version =  project.version
 
 repositories {
     mavenCentral()
