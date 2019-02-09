@@ -19,8 +19,7 @@ pipeline {
     stages {
         stage('Artifactory Config') {
             steps {
-                rtPublishBuildInfo(
-                    serverId: artifactoryServer,
+                rtBuildInfo(
                     maxBuilds: 10,
                     deleteBuildArtifacts: true
                 )
@@ -46,6 +45,9 @@ pipeline {
                     switches: '--no-daemon',
                     resolverId: "artifactory-resolver",
                     deployerId: "artifactory-deployer"
+                )
+                rtPublishBuildInfo(
+                    serverId: artifactoryServer
                 )
             }
         }
