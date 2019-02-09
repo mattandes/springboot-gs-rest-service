@@ -19,6 +19,11 @@ pipeline {
     stages {
         stage('Artifactory Config') {
             steps {
+                println("Testing")
+            }
+        }
+        stage('Build') {
+            steps {
                 rtBuildInfo(
                     maxBuilds: 10,
                     deleteBuildArtifacts: true
@@ -33,10 +38,6 @@ pipeline {
                     serverId: artifactoryServer,
                     repo: artifactorySnapshotRepo
                 )
-            }
-        }
-        stage('Build') {
-            steps {
                 // sh './gradlew clean build'
                 rtGradleRun(
                     usesPlugin: true,
