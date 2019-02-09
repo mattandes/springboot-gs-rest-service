@@ -14,7 +14,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'maven-publish'
+apply plugin: 'maven'
 apply plugin: 'com.jfrog.artifactory'
 
 version =  project.version
@@ -32,19 +32,10 @@ dependencies {
     testCompile('com.jayway.jsonpath:json-path')
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
-}
-
 artifactory {
     publish {
         defaults {
-            //publishConfigs('archives', 'published')
-            publications('mavenJava')
+            publishConfigs('archives', 'published')
         }
     }
 }
