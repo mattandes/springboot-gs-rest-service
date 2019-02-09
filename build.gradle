@@ -14,7 +14,6 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.artifactory'
 
@@ -45,7 +44,7 @@ artifactory {
     publish {
         defaults {
             //publishConfigs('archives', 'published')
-            publishConfigs('mavenJava')
+            publications('mavenJava')
         }
     }
 }
