@@ -32,10 +32,19 @@ dependencies {
     testCompile('com.jayway.jsonpath:json-path')
 }
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
 artifactory {
     publish {
         defaults {
-            publishConfigs('archives', 'published')
+            //publishConfigs('archives', 'published')
+            publishConfigs('mavenJava')
         }
     }
 }
