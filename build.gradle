@@ -35,7 +35,7 @@ dependencies {
 artifactory {
     publish {
         defaults {
-            publishConfigs('bootArchives')
+            publishConfigs('archives','published')
             publishArtifacts = true
             publishPom = true
             publishIvy = true
