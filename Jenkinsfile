@@ -41,16 +41,14 @@ pipeline {
                 rtGradleRun(
                     usesPlugin: true,
                     useWrapper: true,
-                    buildFile: 'build.gradle',
-                    rootDir: ".",
                     tasks: 'clean build artifactoryPublish',
-                    //switches: '--no-daemon',
+                    switches: '--no-daemon',
                     resolverId: "artifactory-resolver",
                     deployerId: "artifactory-deployer"
                 )
-                //rtPublishBuildInfo(
-                //    serverId: artifactoryServer
-                //)
+                rtPublishBuildInfo(
+                    serverId: artifactoryServer
+                )
             }
         }
     }
