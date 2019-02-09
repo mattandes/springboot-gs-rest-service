@@ -38,7 +38,7 @@ pipeline {
                     usesPlugin: true,
                     useWrapper: true,
                     tasks: 'clean build artifactoryPublish',
-                    switches: '--no-daemon',
+                    switches: '--no-daemon -Pversion=0.1.0',
                     resolverId: "artifactory-resolver",
                     deployerId: "artifactory-deployer"
                 )
