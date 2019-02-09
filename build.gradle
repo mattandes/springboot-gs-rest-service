@@ -36,6 +36,9 @@ artifactory {
     publish {
         defaults {
             publishConfigs('archives', 'published')
+            publishArtifacts = true
+            publishPom = true
+            publishIvy = true
         }
     }
 }
