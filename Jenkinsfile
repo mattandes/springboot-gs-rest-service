@@ -37,15 +37,15 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh './gradlew clean build'
-                //rtGradleRun(
-                //    usesPlugin: true,
-                //    useWrapper: true,
-                //    tasks: 'clean build artifactoryPublish',
-                //    switches: '--no-daemon',
-                //    resolverId: "artifactory-resolver",
-                //    deployerId: "artifactory-deployer"
-                //)
+                //sh './gradlew clean build'
+                rtGradleRun(
+                    usesPlugin: true,
+                    useWrapper: true,
+                    tasks: 'clean build artifactoryPublish',
+                    switches: '--no-daemon',
+                    resolverId: "artifactory-resolver",
+                    deployerId: "artifactory-deployer"
+                )
                 //rtPublishBuildInfo(
                 //    serverId: artifactoryServer
                 //)
