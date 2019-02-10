@@ -53,9 +53,9 @@ uploadArchives {
             repository(url: "http://192.168.99.49:8081/repository/maven-snapshots/") {
                 authentication(userName: "admin", password: "changeme")
             }
-            //pom.version = project.version
-            //pom.artifactId = "simple-project"
-            //pom.groupId = "com.example"
+            pom.version = project.version
+            pom.artifactId = "gs-rest-service"
+            pom.groupId = "com.example"
         }
     }
 }
