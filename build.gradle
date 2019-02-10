@@ -21,6 +21,7 @@ apply plugin: 'maven'
 //apply plugin: 'com.jfrog.artifactory'
 
 version = project.version
+group = 'com.example'
 
 repositories {
     mavenCentral()
