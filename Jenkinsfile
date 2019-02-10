@@ -1,60 +1,25 @@
 #!groovy
-// Artifcatory Server Id from Jenkins global config
-def artifactoryServer = "artifactory"
+// Nexus Server URL using NEXUS_URL environment variable set by Jenkins config
+def nexusBaseURL = "${env.NEXUS_URL}/repository"
 
-// Artifactory Resolver Repo
-def artifactoryResolverRepo = "maven-all"
+// Nexus resolver repo URL
+def nexusResolverUrl = "${nexusBaseURL}/maven-public/"
 
-// Artifactory snapshot repo to publish to
-def artifactoryDeployRepo = "libs-snapshot-local"
+// Nexus snapshot repo URL to publish to
+def nexusSnapshotRepoUrl = "${nexusBaseURL}/maven-snapshots/"
 
-// Artifactory release repo to promote to
-def artifactoryPromoteRepo = "libs-release-local"
+// Nexus release repo URL to publish to
+def nexusReleaseRepoUrl = "${nexusBaseURL}/maven-releases/"
+
+// Set the default repo to deploy to
+def nexusDeployRepo = nexusSnapshotRepoUrl
 
 pipeline {
     agent any
     stages {
-        //stage('Artifactory Config') {
-        //    steps {
-        //        rtBuildInfo(
-        //            maxBuilds: 10,
-        //            deleteBuildArtifacts: true
-        //        )
-        //        rtGradleResolver(
-        //            id: 'artifactory-resolver',
-        //            serverId: artifactoryServer,
-        //            repo: artifactoryResolverRepo
-        //        )
-        //        rtGradleDeployer(
-        //            id: 'artifactory-deployer',
-        //            serverId: artifactoryServer,
-        //            repo: artifactoryDeployRepo
-        //        )
-        //    }
-        //}
         stage('Build') {
             steps {
-                //rtGradleRun(
-                //    usesPlugin: true,
-                //    useWrapper: true,
-                //    tasks: 'clean build artifactoryPublish',
-                //    switches: '--no-daemon',
-                //    resolverId: "artifactory-resolver",
-                //    deployerId: "artifactory-deployer"
-                //)
-                //rtPublishBuildInfo(
-                //    serverId: artifactoryServer
-                //)
-                //rtAddInteractivePromotion (
-                //    serverId: artifactoryServer,
-                //    targetRepo: artifactoryPromoteRepo,
-                //    comment: 'Promoted via Jenkins',
-                //    status: 'Released',
-                //    sourceRepo: artifactoryDeployRepo,
-                //    failFast: true,
-                //    copy: false
-                //)
-                sh './gradlew --no-daemon clean build upload'
+                sh "./gradlew --no-daemon -PnexusResolveUrl='${nexusResolverUrl}' -PnexusDeployUrl='${nexusDeployRepo}' clean build upload"
             }
         }
     }

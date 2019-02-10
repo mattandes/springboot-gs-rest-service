@@ -1,14 +1,12 @@
 buildscript {
     repositories {
-        //mavenCentral()
-        //jcenter()
+        // mavenCentral()
         maven {
-            url "http://192.168.99.49:8081/repository/maven-public/"
+            url project.nexusResolveUrl
         }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
-        //classpath("org.jfrog.buildinfo:build-info-extractor-gradle:latest.release")
     }
 }
 
@@ -18,13 +16,15 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'maven'
-//apply plugin: 'com.jfrog.artifactory'
 
 version = project.version
 group = project.group
 
 repositories {
-    mavenCentral()
+    // mavenCentral()
+    maven {
+        url project.nexusResolveUrl
+    }
 }
 
 sourceCompatibility = 1.8
@@ -36,22 +36,11 @@ dependencies {
     testCompile('com.jayway.jsonpath:json-path')
 }
 
-//artifactory {
-//    publish {
-//        defaults {
-//            publishConfigs('archives','published')
-//            publishArtifacts = true
-//            publishPom = true
-//            publishIvy = true
-//        }
-//    }
-//}
-
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: "http://192.168.99.49:8081/repository/maven-snapshots/") {
-                authentication(userName: "admin", password: "changeme")
+            repository(url: project.nexusDeployUrl) {
+                authentication(userName: project.nexusUsername, password: project.nexusPassword)
             }
             pom.version = project.version
             pom.artifactId = rootProject.name
