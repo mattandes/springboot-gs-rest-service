@@ -54,7 +54,7 @@ pipeline {
                 //    failFast: true,
                 //    copy: false
                 //)
-                sh 'gradlew --no-daemon clean build'
+                sh './gradlew --no-daemon clean build'
             }
         }
     }
