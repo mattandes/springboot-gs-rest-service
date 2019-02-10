@@ -45,3 +45,16 @@ dependencies {
 //        }
 //    }
 //}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://192.168.99.49:8081/repository/maven-snapshots/") {
+                authentication(userName: "admin", password: "changeme")
+            }
+            //pom.version = project.version
+            //pom.artifactId = "simple-project"
+            //pom.groupId = "com.example"
+        }
+    }
+}

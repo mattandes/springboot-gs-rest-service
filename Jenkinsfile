@@ -13,9 +13,6 @@ def artifactoryPromoteRepo = "libs-release-local"
 
 pipeline {
     agent any
-    environment {
-        GRADLE_USER_HOME = "${WORKSPACE}"
-    }
     stages {
         //stage('Artifactory Config') {
         //    steps {
@@ -57,7 +54,7 @@ pipeline {
                 //    failFast: true,
                 //    copy: false
                 //)
-                sh './gradlew --no-daemon clean build'
+                sh './gradlew --no-daemon clean build uploadArchives'
             }
         }
     }
