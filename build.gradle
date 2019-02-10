@@ -21,7 +21,7 @@ apply plugin: 'maven'
 //apply plugin: 'com.jfrog.artifactory'
 
 version = project.version
-group = 'com.example'
+group = project.group
 
 repositories {
     mavenCentral()
@@ -54,8 +54,8 @@ uploadArchives {
                 authentication(userName: "admin", password: "changeme")
             }
             pom.version = project.version
-            pom.artifactId = "gs-rest-service"
-            pom.groupId = "com.example"
+            pom.artifactId = rootProject.name
+            pom.groupId = project.group
         }
     }
 }
