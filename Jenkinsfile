@@ -29,11 +29,11 @@ pipeline {
                 script {
                     nexusDeployRepo = nexusReleaseRepoUrl
                 }
-                sh """
+                sh '''
                     CURRENT_VERSION=`cat gradle.properties | grep -e "^version="`
-                    NEW_VERSION=`echo \${CURRENT_VERSION} | sed "s/-SNAPSHOT\\$//"`
-                    sed -i "s/\${CURRENT_VERSION}/\${NEW_VERSION}/" gradle.properties
-                """
+                    NEW_VERSION=`echo ${CURRENT_VERSION} | sed "s/-SNAPSHOT\$//"`
+                    sed -i "s/${CURRENT_VERSION}/${NEW_VERSION}/" gradle.properties
+                '''
             }
         }
         stage('Build') {
