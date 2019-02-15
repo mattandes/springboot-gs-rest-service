@@ -57,7 +57,7 @@ pipeline {
                         git tag ${CURRENT_VERSION}
                         NEW_VERSION=`./increment_version.sh -p ${CURRENT_VERSION}`
                         NEW_VERSION_LINE="version=${NEW_VERSION}-SNAPSHOT"
-                        sed -i "s/${CURRENT_VERSION}/${NEW_VERSION_LINE}/" gradle.properties
+                        sed -i "s/${CURRENT_VERSION_LINE}/${NEW_VERSION_LINE}/" gradle.properties
                         git add gradle.properties
                         git commit -m "[Jenkins] Incrementing version."
                         git push --all
