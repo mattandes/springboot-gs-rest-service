@@ -54,7 +54,7 @@ pipeline {
                         git commit -m "[Jenkins] Creating release version."
                         CURRENT_VERSION_LINE=`cat gradle.properties | grep -e "^version="`
                         CURRENT_VERSION=`echo ${CURRENT_VERSION_LINE} | cut -d'=' -f2`
-                        git tag ${CURRENT_VERSION}
+                        git tag ${CURRENT_VERSION} -m "Release of version ${CURRENT_VERSION}."
                         NEW_VERSION=`./increment_version.sh -p ${CURRENT_VERSION}`
                         NEW_VERSION_LINE="version=${NEW_VERSION}-SNAPSHOT"
                         sed -i "s/${CURRENT_VERSION_LINE}/${NEW_VERSION_LINE}/" gradle.properties
