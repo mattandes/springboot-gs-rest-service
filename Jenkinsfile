@@ -3,7 +3,7 @@
 def nexusBaseURL = "${env.NEXUS_URL}/repository"
 
 // Nexus resolver repo URL
-def nexusResolverUrl = "${nexusBaseURL}/maven-public/"
+def nexusResolverUrl = "${nexusBaseURL}/maven-all/"
 
 // Nexus snapshot repo URL to publish to
 def nexusSnapshotRepoUrl = "${nexusBaseURL}/maven-snapshots/"
